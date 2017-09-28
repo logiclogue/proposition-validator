@@ -32,7 +32,7 @@ function brackets(input) {
 }
 
 function binary(input) {
-    return and(input) || or(input) || xor(input) || ifExp(input);
+    return and(input) || or(input) || xor(input) || ifExp(input) || iff(input);
 }
 
 function and(input) {
@@ -67,6 +67,16 @@ function xor(input) {
 
 function ifExp(input) {
     var halves = input.trim().split(/⇒(.+)/);
+
+    if (halves.length < 2) {
+        return false;
+    }
+
+    return expression(halves[0]) && expression(halves[1]);
+}
+
+function iff(input) {
+    var halves = input.trim().split(/⇔(.+)/);
 
     if (halves.length < 2) {
         return false;
