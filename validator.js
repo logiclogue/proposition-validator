@@ -32,7 +32,7 @@ function brackets(input) {
 }
 
 function binary(input) {
-    return and(input) || or(input);
+    return and(input) || or(input) || xor(input) || ifExp(input);
 }
 
 function and(input) {
@@ -46,7 +46,7 @@ function and(input) {
 }
 
 function or(input) {
-    var halves = input.trim().split(/∨(.+)/)
+    var halves = input.trim().split(/∨(.+)/);
 
     if (halves.length < 2) {
         return false;
@@ -55,11 +55,24 @@ function or(input) {
     return expression(halves[0]) && expression(halves[1]);
 }
 
-module.exports = {
+function xor(input) {
+    var halves = input.trim().split(/⊕(.+)/);
 
-    variable: variable,
-    expression: expression,
-    not: not,
-    brackets: brackets
-    
+    if (halves.length < 2) {
+        return false;
+    }
+
+    return expression(halves[0]) && expression(halves[1]);
 }
+
+function ifExp(input) {
+    var halves = input.trim().split(/⇒(.+)/);
+
+    if (halves.length < 2) {
+        return false;
+    }
+
+    return expression(halves[0]) && expression(halves[1]);
+}
+
+module.exports = expression;
