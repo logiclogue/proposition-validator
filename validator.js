@@ -1,0 +1,51 @@
+function variable(input) {
+    var trimmedInput = input.trim();
+
+    var isP = trimmedInput === 'p';
+    var isQ = trimmedInput === 'q';
+    var isR = trimmedInput === 'r';
+    var isS = trimmedInput === 's';
+
+    return isP || isQ || isR || isS;
+}
+
+function expression(input) {
+    return variable(input) || not(input) || brackets(input) || and(input);
+}
+
+function not(input) {
+    var notSymbol = "¬";
+    var isNot = input.includes(notSymbol);
+    var withoutNot = input.replace(notSymbol, "");
+
+    return isNot && expression(withoutNot);
+}
+
+function brackets(input) {
+    var trimmedInput = input.trim();
+
+    var firstChar = trimmedInput[0] === '(';
+    var lastChar = trimmedInput.slice(-1) === ')';
+    var withoutBrackets = trimmedInput.substr(1).slice(0, -1);
+
+    return firstChar && lastChar && expression(withoutBrackets);
+}
+
+function and(input) {
+    var halves = input.trim().split(/∧(.+)/);
+
+    if (halves.length < 2) {
+        return false;
+    }
+
+    return expression(halves[0]) && expression(halves[1]);
+}
+
+module.exports = {
+
+    variable: variable,
+    expression: expression,
+    not: not,
+    brackets: brackets
+    
+}
