@@ -10,7 +10,7 @@ function variable(input) {
 }
 
 function expression(input) {
-    return variable(input) || not(input) || brackets(input) || and(input);
+    return variable(input) || not(input) || brackets(input) || binary(input);
 }
 
 function not(input) {
@@ -31,8 +31,22 @@ function brackets(input) {
     return firstChar && lastChar && expression(withoutBrackets);
 }
 
+function binary(input) {
+    return and(input) || or(input);
+}
+
 function and(input) {
     var halves = input.trim().split(/∧(.+)/);
+
+    if (halves.length < 2) {
+        return false;
+    }
+
+    return expression(halves[0]) && expression(halves[1]);
+}
+
+function or(input) {
+    var halves = input.trim().split(/∨(.+)/)
 
     if (halves.length < 2) {
         return false;

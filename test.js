@@ -45,8 +45,9 @@ describe("validator", function () {
             var input = "¬q";
 
             expect(validator.not(input)).to.be.true;
+        });
 
-         it("recognises (¬r)", function () {
+        it("recognises (¬r)", function () {
             var input = "(¬r)";
 
             expect(validator.brackets(input)).to.be.true;
@@ -63,6 +64,11 @@ describe("validator", function () {
 
             expect(validator.brackets(input)).to.be.false;
         });
-       });
+
+        it("recognises ¬((q∧¬(p∨¬p)))", function () {
+            var input = "¬((q∧¬(p∨¬p)))";
+
+            expect(validator.expression(input)).to.be.true;
+        });
     });
 });
