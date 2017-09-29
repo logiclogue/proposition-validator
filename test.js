@@ -97,4 +97,10 @@ describe("validator()", function () {
 
         expect(validator(input)).to.be.false;
     });
+
+    it("recognises p ∧ q ⇔ r", function () {
+        var input = "p ∧ q ⇔ r";
+
+        expect(validator(input)).to.be.true;
+    });
 });
