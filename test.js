@@ -91,4 +91,10 @@ describe("validator()", function () {
 
         expect(validator(input)).to.be.false;
     });
+
+    it("doesn't recognise ⇒", function () {
+        var input = "⇒";
+
+        expect(validator(input)).to.be.false;
+    });
 });
