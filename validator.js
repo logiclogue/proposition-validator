@@ -1,16 +1,19 @@
-function variable(input) {
+function expression(input) {
     var trimmedInput = input.trim();
 
-    var isP = trimmedInput === 'p';
-    var isQ = trimmedInput === 'q';
-    var isR = trimmedInput === 'r';
-    var isS = trimmedInput === 's';
-
-    return isP || isQ || isR || isS;
+    return variable(trimmedInput) ||
+        not(trimmedInput) ||
+        brackets(trimmedInput) ||
+        binary(trimmedInput);
 }
 
-function expression(input) {
-    return variable(input) || not(input) || brackets(input) || binary(input);
+function variable(input) {
+    var isP = input === 'p';
+    var isQ = input === 'q';
+    var isR = input === 'r';
+    var isS = input === 's';
+
+    return isP || isQ || isR || isS;
 }
 
 function not(input) {
@@ -22,11 +25,9 @@ function not(input) {
 }
 
 function brackets(input) {
-    var trimmedInput = input.trim();
-
-    var firstChar = trimmedInput[0] === '(';
-    var lastChar = trimmedInput.slice(-1) === ')';
-    var withoutBrackets = trimmedInput.substr(1).slice(0, -1);
+    var firstChar = input[0] === '(';
+    var lastChar = input.slice(-1) === ')';
+    var withoutBrackets = input.substr(1).slice(0, -1);
 
     return firstChar && lastChar && expression(withoutBrackets);
 }
@@ -36,7 +37,7 @@ function binary(input) {
 }
 
 function and(input) {
-    var halves = input.trim().split(/∧(.+)/);
+    var halves = input.split(/∧(.+)/);
 
     if (halves.length < 2) {
         return false;
@@ -46,7 +47,7 @@ function and(input) {
 }
 
 function or(input) {
-    var halves = input.trim().split(/∨(.+)/);
+    var halves = input.split(/∨(.+)/);
 
     if (halves.length < 2) {
         return false;
@@ -56,7 +57,7 @@ function or(input) {
 }
 
 function xor(input) {
-    var halves = input.trim().split(/⊕(.+)/);
+    var halves = input.split(/⊕(.+)/);
 
     if (halves.length < 2) {
         return false;
@@ -66,7 +67,7 @@ function xor(input) {
 }
 
 function ifExp(input) {
-    var halves = input.trim().split(/⇒(.+)/);
+    var halves = input.split(/⇒(.+)/);
 
     if (halves.length < 2) {
         return false;
@@ -76,7 +77,7 @@ function ifExp(input) {
 }
 
 function iff(input) {
-    var halves = input.trim().split(/⇔(.+)/);
+    var halves = input.split(/⇔(.+)/);
 
     if (halves.length < 2) {
         return false;
