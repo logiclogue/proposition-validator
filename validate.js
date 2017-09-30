@@ -1,10 +1,10 @@
 function expression(input) {
     var trimmedInput = input.trim();
 
-    return variable(trimmedInput) ||
+    return brackets(trimmedInput) ||
         not(trimmedInput) ||
-        brackets(trimmedInput) ||
-        binary(trimmedInput);
+        binary(trimmedInput) ||
+        variable(trimmedInput);
 }
 
 function variable(input) {
