@@ -1,13 +1,13 @@
 {
   "name": "proposition-validator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Checks a given proposition to see whether it is a well formed formula",
+  "main": "validate.js",
   "scripts": {
     "test": "mocha test"
   },
   "author": "Jordan Lord (http://jordanlord.co.uk)",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
