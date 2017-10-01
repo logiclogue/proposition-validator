@@ -8,7 +8,8 @@
   },
   "author": "Jordan Lord (http://jordanlord.co.uk)",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^3.5.3"
   }
